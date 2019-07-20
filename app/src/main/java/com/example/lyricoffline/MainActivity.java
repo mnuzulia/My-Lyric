@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<LyricList>() {
             @Override
             public void onResponse(Call<LyricList> call, Response<LyricList> response) {
-                adapter = new LyricAdapter((response.body().getLyrics()), getApplicationContext());
+                adapter = new LyricAdapter((response.body().getLyricsList()), getApplicationContext());
                 recyclerView.setAdapter(adapter);
             }
 

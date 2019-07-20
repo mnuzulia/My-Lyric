@@ -9,11 +9,11 @@ public class LyricList {
 
     }
 
-    public ArrayList<Lyric> getLyrics() {
+    public ArrayList<Lyric> getLyricsList() {
         return lyrics;
     }
 
-    public void setLyrics(ArrayList<Lyric> lyrics) {
+    public void setLyricsList(ArrayList<Lyric> lyrics) {
         this.lyrics= lyrics;
     }
 
