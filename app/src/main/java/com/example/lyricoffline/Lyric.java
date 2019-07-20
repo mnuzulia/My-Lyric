@@ -1,18 +1,26 @@
 package com.example.lyricoffline;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lyric {
 
+    private int id;
     private String title;
     private String artist;
-    private ArrayList<Lyric> lyrics;
 
 
-    public Lyric(String title, String artist){
-        this.title = title;
-        this.artist = artist;
+    public Lyric(int id){
+        this.id = id;
 
+    }
+
+    public  int getId(){
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle(){
@@ -30,18 +38,5 @@ public class Lyric {
     public void setArtist(String artist) {
         this.artist = artist;
     }
-
-    public Lyric(){
-
-    }
-
-    public ArrayList<Lyric> getLyrics() {
-        return lyrics;
-    }
-
-    public void setLyrics(ArrayList<Lyric> lyrics) {
-        this.lyrics= lyrics;
-    }
-
 
 }

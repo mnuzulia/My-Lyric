@@ -7,13 +7,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LyricAdapter extends RecyclerView.Adapter<LyricAdapter.LyricViewHolder>{
-    private ArrayList<Lyric> dataList;
+    private List<Lyric> lyrics;
     private Context mCtx;
 
-    public LyricAdapter(ArrayList<Lyric> dataList, Context mCtx) {
-        this.dataList = dataList;
+    public LyricAdapter(ArrayList<Lyric> lyrics, Context mCtx) {
+        this.lyrics = lyrics;
         this.mCtx = mCtx;
     }
     @Override
@@ -25,13 +26,14 @@ public class LyricAdapter extends RecyclerView.Adapter<LyricAdapter.LyricViewHol
 
     @Override
     public void onBindViewHolder(LyricViewHolder holder, int position) {
-        holder.txtTitle.setText(dataList.get(position).getTitle());
-        holder.txtArtist.setText(dataList.get(position).getArtist());
+        Lyric lyric = lyrics.get(position);
+        holder.txtTitle.setText(lyric.getTitle());
+        holder.txtArtist.setText(lyric.getArtist());
     }
 
     @Override
     public int getItemCount() {
-        return (dataList != null) ? dataList.size() : 0;
+        return lyrics.size();
     }
 
     public class LyricViewHolder extends RecyclerView.ViewHolder{

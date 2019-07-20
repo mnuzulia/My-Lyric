@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     AnimationDrawable animationDrawable;
     private RecyclerView recyclerView;
     private LyricAdapter adapter;
-    private ArrayList<Lyric> LyricArrayList;
+    private LyricList lyricList;
 
     FloatingActionButton btnCreate;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(2000);
         //end of Animation Background
 
+        //read data api
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -56,22 +58,23 @@ public class MainActivity extends AppCompatActivity {
 
         APIService service = retrofit.create(APIService.class);
 
-        Call<Lyric> call = service.getLyrics();
+        Call<LyricList> call = service.getLyrics();
 
-        call.enqueue(new Callback<Lyric>() {
+        call.enqueue(new Callback<LyricList>() {
             @Override
-            public void onResponse(Call<Lyric> call, Response<Lyric> response) {
+            public void onResponse(Call<LyricList> call, Response<LyricList> response) {
                 adapter = new LyricAdapter((response.body().getLyrics()), getApplicationContext());
                 recyclerView.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<Lyric> call, Throwable t) {
-
+            public void onFailure(Call<LyricList> call, Throwable t) {
             }
         });
+        //end of read data api
 
 
+        //Intent when click floating action button
         btnCreate = findViewById(R.id.fab);
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        //end intent when click floating action button
 
     }
 
