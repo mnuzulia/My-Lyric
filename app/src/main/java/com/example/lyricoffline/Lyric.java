@@ -8,6 +8,7 @@ public class Lyric {
     private int id;
     private String title;
     private String artist;
+    private String lyric;
 
 
     public Lyric(int id){
@@ -37,6 +38,10 @@ public class Lyric {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    public String getLyric(){
+        return lyric;
     }
 
 }

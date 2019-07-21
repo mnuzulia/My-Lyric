@@ -5,7 +5,7 @@ import retrofit2.http.GET;
 
 
 public interface APIService {
-    @GET("lyrics/{id}")
+    @GET("lyrics")
     Call<LyricList> getLyrics(
     );
 }

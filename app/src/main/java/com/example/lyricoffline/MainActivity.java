@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -23,8 +24,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    RelativeLayout relativeLayout;
     AnimationDrawable animationDrawable;
+    RelativeLayout relativeLayout;
     private RecyclerView recyclerView;
     private LyricAdapter adapter;
     private LyricList lyricList;
@@ -38,18 +39,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Animation Background
-        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        relativeLayout = findViewById(R.id.relativeLayout);
         animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
 
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(2000);
         //end of Animation Background
 
-        //read data api
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //read data api findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(APIUrl.BASE_URL)
@@ -63,12 +63,14 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<LyricList>() {
             @Override
             public void onResponse(Call<LyricList> call, Response<LyricList> response) {
-                adapter = new LyricAdapter((response.body().getLyricsList()), getApplicationContext());
+                adapter = new LyricAdapter(response.body().getLyricsList(), getApplicationContext());
                 recyclerView.setAdapter(adapter);
+//                Toast.makeText(getApplicationContext(), "berhasil", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<LyricList> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "gagal", Toast.LENGTH_LONG).show();
             }
         });
         //end of read data api
